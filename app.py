@@ -68,6 +68,9 @@ def copy_translations_to_master(selected_translations: List[Dict[str, Any]]):
     if not st.session_state.master_client:
         return False, "Master client not initialized"
     
+    # Get default locale from environment or use 'en' as fallback
+    default_locale = os.getenv('DEFAULT_LOCALE', 'en')
+    
     results = {
         "success": 0,
         "failed": 0,
@@ -80,7 +83,7 @@ def copy_translations_to_master(selected_translations: List[Dict[str, Any]]):
             created = st.session_state.master_client.create_translation(
                 key=translation.get('key'),
                 value=translation.get('value'),
-                locale=translation.get('locale', 'en')
+                locale=translation.get('locale', default_locale)
             )
             
             # Publish the translation

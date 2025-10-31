@@ -60,9 +60,6 @@ class HygraphClient:
         query {{
             {model_name}s {{
                 id
-                ... on Node {{
-                    id
-                }}
             }}
         }}
         """
